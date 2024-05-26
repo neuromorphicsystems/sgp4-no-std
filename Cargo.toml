@@ -1,0 +1,29 @@
+[package]
+name = "sgp4"
+version = "0.0.1"
+authors = [
+    "International Centre for Neuromorphic Systems",
+    "Alexandre Marcireau",
+]
+description = "No-std SGP4 experiments"
+edition = "2021"
+resolver = "2"
+
+[dependencies]
+sgp4 = {version = "2.2.0", default-features = false, features = ["libm"]}
+num-traits = {version = "0.2.19", default-features = false, features = ["libm"]}
+compiler_builtins = {git = "https://github.com/rust-lang/compiler-builtins", features = [
+    "compiler-builtins",
+    "mem",
+]}
+
+[profile.dev]
+panic = "abort"
+codegen-units = 1
+
+[profile.release]
+opt-level = "z"
+panic = "abort"
+codegen-units = 1
+lto = true
+strip = true
